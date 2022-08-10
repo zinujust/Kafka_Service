@@ -23,8 +23,9 @@ public class OrderController {
 	
 	@PostMapping("/order")
 	public ResponseEntity<?> createOrder(@RequestBody Order order) {
-		repo.save(order);
+		order.setId(null);
 		service.produce(order);
+		repo.save(order);
 		
 		return ResponseEntity.status(201).body(order + " created");
 	}
